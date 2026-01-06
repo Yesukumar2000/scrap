@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrap Platform - Project Showcase</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ffa3;
+            --primary-dark: #00cc82;
+            --secondary: #7000ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-secondary: #a0a0a0;
+            --gradient-main: linear-gradient(135deg, #00ffa3 0%, #7000ff 100%);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 163, 0.08) 0%, transparent 40%);
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: var(--gradient-main);
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 255, 163, 0.1);
+            border: 1px solid rgba(0, 255, 163, 0.2);
+            color: var(--primary);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Features Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 40px;
+            border-radius: 24px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 163, 0.3);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::after {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .feature-list li {
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .feature-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Tech Stack */
+        .tech-pill {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tech-pill:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(0, 255, 163, 0.05);
+        }
+
+        /* Modules Section */
+        .modules-section {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 80px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .module-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .module-tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .module-tab.active {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .completion-badge {
+            background: rgba(0, 255, 163, 0.15);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div>
+                <span class="hero-badge">Backend API Development Complete</span>
+                <h1>Next-Gen Scrap<br>Collection Platform</h1>
+                <p class="hero-desc">
+                    A comprehensive, production-ready backend system specifically engineered for modern recycling
+                    businesses.
+                    Connecting customers, agents, and admins in real-time.
+                </p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">40+</span>
+                        <span class="stat-label">API Endpoints</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">User Roles</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Secure</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">Real-time</span>
+                        <span class="stat-label">Tracking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Modules -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Eco-System Architecture</h2>
+                <div class="section-subtitle">Three robust applications powered by one unified core.</div>
+            </div>
+
+            <div class="feature-grid">
+                <!-- Customer App -->
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Customer App</h3>
+                    <p style="color: var(--text-secondary);">Seamless experience for users to schedule pickups and get
+                        paid.</p>
+                    <ul class="feature-list">
+                        <li>OTP-based Authentication (Secure Login)</li>
+                        <li>Smart Price Estimator for Scrap</li>
+                        <li>Slot Booking & Scheduling</li>
+                        <li>Live Agent Tracking on Map</li>
+                        <li>Digital Wallet & Transaction History</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <span class="tech-pill">JWT Auth</span>
+                        <span class="tech-pill">GeoJSON</span>
+                    </div>
+                </div>
+
+                <!-- Agent App -->
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3 class="feature-title">Agent App</h3>
+                    <p style="color: var(--text-secondary);">Powerful tools for agents to manage logistics and earnings.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Real-time Job Assignment</li>
+                        <li>Turn-by-turn Navigation Support</li>
+                        <li>Digital Weighing & Item Logging</li>
+                        <li>Image Upload for Verification</li>
+                        <li>Instant Earnings & Payout Requests</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <span class="tech-pill">Multer Uploads</span>
+                        <span class="tech-pill">State Machine</span>
+                    </div>
+                </div>
+
+                <!-- Admin Panel -->
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Admin Dashboard</h3>
+                    <p style="color: var(--text-secondary);">Total control over business operations and analytics.</p>
+                    <ul class="feature-list">
+                        <li>User & Agent Management</li>
+                        <li>Dynamic Pricing Control Center</li>
+                        <li>CMS for Banners, Blogs & Promos</li>
+                        <li>Financial Payout Processing</li>
+                        <li>Advanced Analytics & Reports</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <span class="tech-pill">RBAC</span>
+                        <span class="tech-pill">Dashboard Stats</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Excellence -->
+        <div class="modules-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technical Highlights</h2>
+                    <div class="section-subtitle">Built with industry-standard best practices.</div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card" style="padding: 30px;">
+                        <h4 style="margin-bottom: 15px; color: var(--primary);">Security First</h4>
+                        <p style="font-size: 0.95rem; color: var(--text-secondary);">
+                            Implemented strict JWT Bearer token authentication with Role-Based Access Control (RBAC).
+                            Every API endpoint is protected to ensure only authorized users can access sensitive data.
+                        </p>
+                    </div>
+                    <div class="feature-card" style="padding: 30px;">
+                        <h4 style="margin-bottom: 15px; color: var(--primary);">Scalable Storage</h4>
+                        <p style="font-size: 0.95rem; color: var(--text-secondary);">
+                            Integrated robust file upload systems (Multer) handling agent verification images, pickup
+                            photos, and banner assets securely.
+                            Structured directory management for clean asset organization.
+                        </p>
+                    </div>
+                    <div class="feature-card" style="padding: 30px;">
+                        <h4 style="margin-bottom: 15px; color: var(--primary);">Atomic Transactions</h4>
+                        <p style="font-size: 0.95rem; color: var(--text-secondary);">
+                            Financial operations (Pickups, Wallet Credits) utilize MongoDB Sessions to ensure data
+                            integrity.
+                            Money is never lost or double-counted during operations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Reference -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>API Endpoints Reference</h2>
+                    <div class="section-subtitle">A glimpse into the 40+ endpoints powering the system.</div>
+                </div>
+
+                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+                    <!-- Auth API -->
+                    <div class="feature-card" style="padding: 30px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Authentication</h3>
+                        <ul class="feature-list" style="margin-top: 0;">
+                            <li><b style="color:#fff;">POST /auth/send-otp</b> - Login/Register via OTP</li>
+                            <li><b style="color:#fff;">POST /auth/verify-otp</b> - Verify & Get Token</li>
+                            <li><b style="color:#fff;">GET /auth/google</b> - OAuth 2.0 Integration</li>
+                            <li><b style="color:#fff;">GET /auth/me</b> - Get Profile</li>
+                        </ul>
+                    </div>
+
+                    <!-- Customer API -->
+                    <div class="feature-card" style="padding: 30px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Customer Module</h3>
+                        <ul class="feature-list" style="margin-top: 0;">
+                            <li><b style="color:#fff;">POST /customer/pickups</b> - Book Pickup</li>
+                            <li><b style="color:#fff;">GET /customer/pickups</b> - History & Status</li>
+                            <li><b style="color:#fff;">GET /customer/wallet</b> - Balance Check</li>
+                            <li><b style="color:#fff;">GET /customer/pickups/rates</b> - Live Scrap Rates</li>
+                        </ul>
+                    </div>
+
+                    <!-- Agent API -->
+                    <div class="feature-card" style="padding: 30px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Agent Module</h3>
+                        <ul class="feature-list" style="margin-top: 0;">
+                            <li><b style="color:#fff;">GET /agent/dashboard</b> - Daily Stats</li>
+                            <li><b style="color:#fff;">PUT /agent/pickups/:id/accept</b> - Claim Job</li>
+                            <li><b style="color:#fff;">POST /agent/location</b> - GPS Stream</li>
+                            <li><b style="color:#fff;">PUT /agent/pickups/:id/log-items</b> - Upload Photos/Weights</li>
+                            <li><b style="color:#fff;">POST /agent/payout/request</b> - Withdraw Earnings</li>
+                        </ul>
+                    </div>
+
+                    <!-- Admin API -->
+                    <div class="feature-card" style="padding: 30px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Admin Controls</h3>
+                        <ul class="feature-list" style="margin-top: 0;">
+                            <li><b style="color:#fff;">GET /admin/dashboard</b> - System Analytics</li>
+                            <li><b style="color:#fff;">POST /admin/scrap-items</b> - Manage Pricing</li>
+                            <li><b style="color:#fff;">PUT /admin/agents/:id/approve</b> - Verify Agents</li>
+                            <li><b style="color:#fff;">POST /admin/banners</b> - Content Management</li>
+                            <li><b style="color:#fff;">GET /admin/payouts</b> - Financial Oversight</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Scrap Platform Backend • Developed Jan 2026 • Production Ready</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
